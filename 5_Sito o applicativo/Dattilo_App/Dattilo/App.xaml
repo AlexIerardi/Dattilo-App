@@ -1,0 +1,15 @@
+﻿<Application
+    x:Class="Dattilo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewmodels="clr-namespace:Dattilo.ViewModels"
+    xmlns:views="clr-namespace:Dattilo.Views"
+    xmlns:local="clr-namespace:Dattilo"
+    StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:ApprendimentoViewModel}">
+            <views:ApprendimentoView/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

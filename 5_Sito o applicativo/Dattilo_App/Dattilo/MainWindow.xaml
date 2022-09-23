@@ -1,0 +1,20 @@
+﻿<Window x:Class="Dattilo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dattilo"
+        xmlns:viewmodel="clr-namespace:Dattilo.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Button Content="Apprendimento" HorizontalAlignment="Left" Margin="276,197,0,0" VerticalAlignment="Top"/>
+        <Button Content="Dettatura" HorizontalAlignment="Left" Margin="484,197,0,0" VerticalAlignment="Top"/>
+
+        <ContentControl Content="{Binding SelectedViewModel}"/>
+    </Grid>
+</Window>
