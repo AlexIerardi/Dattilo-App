@@ -11,7 +11,6 @@ E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\bin\
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\bin\Debug\net6.0-windows\Dattilo.pdb
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\bin\Debug\net6.0-windows\CommunityToolkit.Mvvm.dll
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\MainWindow.g.cs
-E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\MainWindow.baml
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Views\ApprendimentnoView.baml
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Views\DattaturaView.baml
@@ -26,3 +25,17 @@ E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo.pdb
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo.genruntimeconfig.cache
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\ref\Dattilo.dll
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo.csproj.AssemblyReference.cache
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Views\ApprendimentnoView.g.cs
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Views\DattaturaView.g.cs
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\App.g.cs
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo_MarkupCompile.cache
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo_MarkupCompile.lref
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo.dll
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\refint\Dattilo.dll
+D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo.pdb
+E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Views\MainView.g.cs
+E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Views\MainView.baml
+E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs

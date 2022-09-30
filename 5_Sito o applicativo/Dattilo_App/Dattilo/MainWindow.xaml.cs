@@ -25,7 +25,6 @@ namespace Dattilo
         {
             InitializeComponent();
 
-            DataContext = new MainViewModel();
         }
     }
 }

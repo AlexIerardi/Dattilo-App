@@ -6,10 +6,5 @@
     xmlns:views="clr-namespace:Dattilo.Views"
     xmlns:local="clr-namespace:Dattilo"
     StartupUri="MainWindow.xaml">
-
-    <Application.Resources>
-        <DataTemplate DataType="{x:Type viewmodels:ApprendimentoViewModel}">
-            <views:ApprendimentoView/>
-        </DataTemplate>
-    </Application.Resources>
+    
 </Application>
