@@ -16,7 +16,7 @@ namespace Dattilo.ViewModels
         public ObservableObject SelectedViewModel
         {
             get { return _selectedViewModel; }
-            set 
+            set
             {
                 _selectedViewModel = value;
                 OnPropertyChanged(nameof(SelectedViewModel));

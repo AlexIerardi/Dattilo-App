@@ -24,7 +24,6 @@ namespace Dattilo
         public MainWindow()
         {
             InitializeComponent();
-
         }
     }
 }
