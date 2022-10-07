@@ -5,4 +5,6 @@
     xmlns:local="clr-namespace:Dattilo"
     xmlns:viewmodels="clr-namespace:Dattilo.ViewModels"
     xmlns:views="clr-namespace:Dattilo.Views"
-    StartupUri="MainWindow.xaml" />
+    StartupUri="MainWindow.xaml">
+    
+</Application>

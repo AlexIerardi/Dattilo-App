@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\App.xaml
-4521923659
+4-1421090981
 
-112055000503
+13-994203486
 195481236873
-MainWindow.xaml;Views\ApprendimentoView.xaml;Views\DettaturaView.xaml;Views\MainView.xaml;
+MainWindow.xaml;Views\ApprendimentoView.xaml;Views\DettaturaView.xaml;Views\menuView.xaml;
 
-False
+True
 

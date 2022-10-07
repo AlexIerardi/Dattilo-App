@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Dattilo.ViewModels
 {
-    public class DettaturaViewModel : ObservableObject
+    internal class DettaturaViewModel : ObservableObject
     {
-        public DettaturaViewModel()
-        {
 
-        }
     }
 }

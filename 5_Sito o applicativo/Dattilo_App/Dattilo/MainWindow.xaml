@@ -8,7 +8,31 @@
         xmlns:viewmodels="clr-namespace:Dattilo.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:ApprendimentoViewModel}">
+            <views:ApprendimentoView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:DettaturaViewModel}">
+            <views:DettaturaView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:MenuViewModel}">
+            <views:menuView/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <Frame Source="Views\MainView.xaml"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <ContentControl Content="{Binding SelectedViewModel}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Button Content="Apprendimento" Grid.Row="1" VerticalAlignment="center" HorizontalAlignment="Left" Command="{Binding UpdateViewCommand}" CommandParameter="Apprendimento"/>
+        <Button Content="Dettatura" Grid.Row="1" VerticalAlignment="center" HorizontalAlignment="Right" Command="{Binding UpdateViewCommand}" CommandParameter="Dettatura"/>
+        <Button Content="Menu" Grid.Row="1" VerticalAlignment="center" HorizontalAlignment="center" Command="{Binding UpdateViewCommand}" CommandParameter="Menu"/>
     </Grid>
 </Window>

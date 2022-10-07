@@ -31,11 +31,13 @@ namespace Dattilo.ViewModels
 
         private void OnUpdate(string? obj)
         {
-            string vm = obj ?? "Apprendimento";
+            string vm = obj ?? "Menu";
             if (vm == "Apprendimento")
                 SelectedViewModel = new ApprendimentoViewModel();
-            else
+            else if(vm == "Dettatura")
                 SelectedViewModel = new DettaturaViewModel();
+            else
+                SelectedViewModel = new MenuViewModel();
         }
     }
 }
