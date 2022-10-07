@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Dattilo.Views
 {
     /// <summary>
-    /// Logica di interazione per DattaturaView.xaml
+    /// Logica di interazione per DettaturaView.xaml
     /// </summary>
-    public partial class DattaturaView : Page
+    public partial class DettaturaView : UserControl
     {
-        public DattaturaView()
+        public DettaturaView()
         {
             InitializeComponent();
         }

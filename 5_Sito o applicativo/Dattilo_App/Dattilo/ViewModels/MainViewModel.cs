@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Dattilo.Commands;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Dattilo.ViewModels
 {
@@ -22,11 +21,21 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(SelectedViewModel));
             }
         }
-        public ICommand UpdateViewCommand { get; set; }
+        public IRelayCommand<string> UpdateViewCommand { get; set; }
 
         public MainViewModel()
         {
-            UpdateViewCommand = new UpdateViewCommand(this);
+            //_selectedViewModel = new MainViewModel();
+            UpdateViewCommand = new RelayCommand<string>(OnUpdate);
+        }
+
+        private void OnUpdate(string? obj)
+        {
+            string vm = obj ?? "Apprendimento";
+            if (vm == "Apprendimento")
+                SelectedViewModel = new ApprendimentoViewModel();
+            else
+                SelectedViewModel = new DettaturaViewModel();
         }
     }
 }

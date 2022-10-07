@@ -15,10 +15,10 @@
     
     <Page.Resources>
         <DataTemplate DataType="{x:Type viewmodels:ApprendimentoViewModel}">
-            <local:ApprendimentnoView/>
+            <local:ApprendimentoView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:DettaturaViewModel}">
-            <local:DattaturaView/>
+            <local:DettaturaView/>
         </DataTemplate>
     </Page.Resources>
     
