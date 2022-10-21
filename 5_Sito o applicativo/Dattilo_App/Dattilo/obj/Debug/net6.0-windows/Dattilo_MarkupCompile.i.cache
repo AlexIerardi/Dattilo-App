@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\
+E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\
 Dattilo
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\App.xaml
+E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\App.xaml
 4-1421090981
 
 13-994203486
 198-89494467
 MainWindow.xaml;Views\ApprendimentoView.xaml;Views\DettaturaView.xaml;Views\menuView.xaml;
 
-True
+False
 

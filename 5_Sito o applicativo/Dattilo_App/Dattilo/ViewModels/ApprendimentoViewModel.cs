@@ -32,8 +32,7 @@ namespace Dattilo.ViewModels
                 model.cambiaLunghezzaCharLivello();
                 OnPropertyChanged(nameof(Stampa));
             }
-        }
-        
+        }        
         //stampa del array di caratteri
         public String Stampa
         {
@@ -42,9 +41,26 @@ namespace Dattilo.ViewModels
                 model.generaLivello();
                 return model.stampaLivello(); 
             }
-            
         }
-        
+        //testo inserito dall'utente
+        public string TestoUtente
+        {
+            get 
+            {
+                if (model.confrontaChar())
+                    return "diomaiale";
+                else
+                    return "";
+            }
+            set 
+            {
+                if (model.TestoUtente == value)
+                    return;
+                model.TestoUtente = value;
+                OnPropertyChanged(nameof(TestoUtente));
+            }
+        }
+
         #endregion
 
         #region =================== costruttori ================
