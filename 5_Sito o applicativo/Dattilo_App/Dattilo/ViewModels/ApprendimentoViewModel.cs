@@ -29,13 +29,22 @@ namespace Dattilo.ViewModels
                     return;
                 model.NCaratteri = value;
                 OnPropertyChanged(nameof(NCaratteri));
+                model.cambiaLunghezzaCharLivello();
+                OnPropertyChanged(nameof(Stampa));
             }
         }
+        
         //stampa del array di caratteri
         public String Stampa
         {
-            get { return model.stampaLivello(); }
+            get 
+            {
+                model.generaLivello();
+                return model.stampaLivello(); 
+            }
+            
         }
+        
         #endregion
 
         #region =================== costruttori ================

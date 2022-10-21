@@ -4,9 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dattilo.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:viewmodels="clr-namespace:Dattilo.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content="apprendimento"/>
+    
+    <UserControl.DataContext>
+        <viewmodels:ApprendimentoViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="197*"/>
+            <RowDefinition Height="253*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="437*"/>
+            <ColumnDefinition Width="363*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label 
+            Content="{Binding Path=Stampa}" 
+            Grid.Row="1" 
+            Grid.Column="1"/>
+        
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label 
+                Content="Numero di caratteri"
+                HorizontalAlignment="center"/>
+            <controls:NumericUpDown 
+                Value="{Binding Path=NCaratteri}"
+                VerticalAlignment="center"
+                HorizontalAlignment="center"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label
+                Content="inserisci testo"
+                HorizontalAlignment="center"/>
+            <TextBox
+                x:Name="tbTestoUtente"/>
+        </StackPanel>
     </Grid>
 </UserControl>

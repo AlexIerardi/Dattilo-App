@@ -14,10 +14,9 @@ namespace Dattilo.Models
         #endregion
 
         #region =================== membri statici =============
-        Random rnd = new Random();
+        private Random rnd = new Random();
         //array di lettere per i levelli
-        private string[] charPrimoLivello = new string[] {"f","j"," "};
-        private string[] charSecondoLivello = new string[] {"f","j","d","k"," "};
+        private string[][] livelli = new string[15][];
         #endregion
 
         #region =================== membri & proprietà =========
@@ -37,51 +36,74 @@ namespace Dattilo.Models
         public string[] CharLivello { get; set; }
         //numero che incrementa ad ogni livello superato
         public int Nlivello { get; set; }
-
+        //testo che inserisce l'utente
+        //https://stackoverflow.com/questions/47128393/how-to-detect-keypress-in-textbox-using-mvvm-light
+        private string testoUtente;
+        public string TestoUtente
+        {
+            get { return testoUtente; }
+            set { testoUtente = value; }
+        }
         #endregion
 
         #region =================== costruttori ================
         public Apprendimento()
         {
-            generaLivello();
+            inizializzaLivelli();
             NCaratteri = 30;
-            Nlivello = 1;
+            Nlivello = 0;
             CharLivello = new string[NCaratteri];
+            TestoUtente = "";
         }
-        
+
         #endregion
 
         #region =================== metodi privati e aiuto =====
         //in base al livello riempe l'array con lettere differenti
         public void generaLivello()
         {
-            if (Nlivello == 1)
+            for (int i = 0; i < NCaratteri; i++)
             {
-                for (int i = 0; i < NCaratteri; i++)
-                {
-                    CharLivello[i] = charPrimoLivello[rnd.Next(0, 2)];
-                }
-            }else if (Nlivello == 2)
-            {
-                for (int i = 0; i < NCaratteri; i++)
-                {
-                    CharLivello[i] = charSecondoLivello[rnd.Next(0, 4)];
-                }
+                CharLivello[i] = livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
             }
         }
+        //incremento livello
         public void incrementaLivello()
         {
-            //da fare
+            Nlivello++;
+        }
+        //metodo per cambiare la lunghezza dell'array per i caratteri da stampare
+        public void cambiaLunghezzaCharLivello()
+        {
+            CharLivello = new string[NCaratteri];
+        }
+        //
+        public void confrontaTesti()
+        {
+
         }
 
+        //metodo per riempire l'array di stringhe con 
+        private void inizializzaLivelli()
+        {
+            livelli[0] = new string[3] { "f", "j", " " };
+            livelli[1] = new string[5] { "f", "j", "d", "k", " " };
+            livelli[2] = new string[7] { "f", "j", "d", "k", "s", "l", " " };
+            //altri livelli
+        }
         #endregion
 
         #region =================== metodi generali ============
+        //metodo che stampa l'array dei caratteri
         public string stampaLivello()
         {
-            //da fare
-            return "";
-        }
+            string stampa = "";
+            for(int i = 0; i < CharLivello.Length; i++)
+            {
+                stampa += CharLivello[i];
+            }
+            return stampa;
+        }        
         #endregion
 
 
