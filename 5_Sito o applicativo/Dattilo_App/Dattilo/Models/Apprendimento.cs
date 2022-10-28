@@ -34,17 +34,18 @@ namespace Dattilo.Models
                 nCaratteri = value; 
             }
         }
+        //testo che inserisce l'utente
+        public string TestoUtente { get; set; }
         //array con i caratteri del livello
-        public string[] CharLivello { get; set; }
+        public string CharLivello { get; set; }
         //numero che incrementa ad ogni livello superato
         public int Nlivello { get; set; }
-        //testo che inserisce l'utente
-        private string testoUtente;
-        public string TestoUtente
-        {
-            get { return testoUtente; }
-            set { testoUtente = value; }
-        }
+        //numero di caratteri giusti
+        public int CorrectChar { get; set; }
+        //numero di caratteri sbagliati
+        public int WrongChar { get; set; }
+        //percentuale di caratteri giusti
+        //da fare
         #endregion
 
         #region =================== costruttori ================
@@ -53,8 +54,10 @@ namespace Dattilo.Models
             inizializzaLivelli();
             NCaratteri = 30;
             Nlivello = 0;
-            CharLivello = new string[NCaratteri];
+            CharLivello = "";
             TestoUtente = "";
+            CorrectChar = 0;
+            WrongChar = 0;
         }
 
         #endregion
@@ -64,21 +67,21 @@ namespace Dattilo.Models
         public void generaLivello()
         {
 
-            for (int i = 0; i < NCaratteri; i++)
-            {
-                CharLivello[i] = livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
-            }
+            //for (int i = 0; i < NCaratteri; i++)
+            //{
+            //    CharLivello[i] = livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
+            //}
 
             for (int i = 0; i < NCaratteri; i++)
             {
                 if (i % 2 == 0)
                 {
-                    CharLivello[i] = "f";
+                    CharLivello += "f";
 
                 }
                 else
                 {
-                    CharLivello[i] = "g";
+                    CharLivello += "g";
                 }
             }
             //CharLivello[0] = "f";
@@ -92,28 +95,30 @@ namespace Dattilo.Models
         {
             Nlivello++;
         }
-        //metodo per cambiare la lunghezza dell'array per i caratteri da stampare
-        public void cambiaLunghezzaCharLivello()
+        
+        public void confrontaChar()
         {
-            CharLivello = new string[NCaratteri];
-        }
-        public bool confrontaChar()
-        {
-            if (posChar <= NCaratteri)
+            if (posChar < NCaratteri)
             {
-                if (TestoUtente[posChar].ToString().Equals(CharLivello[posChar].ToString()))
+                if(TestoUtente.Length-1 == posChar)
                 {
-                    posChar++;
-                    return true;
-                }
-                else
-                    return false;
+                    if (TestoUtente[posChar].Equals(CharLivello[posChar])) 
+                    {
+                        posChar++;
+                        CorrectChar++;
+                    }
+                    else
+                    {
+                        TestoUtente = TestoUtente.Substring(0, posChar);
+                        WrongChar++;
+                    }
 
+                }
             }
             else
             {
-                posChar = 0;
-                return false;
+               // quando ha finito di scrivere
+               posChar = 0;
             }
         }
         //metodo per riempire l'array di stringhe con 
@@ -138,6 +143,7 @@ namespace Dattilo.Models
             return stampa;
         }        
         #endregion
+
 
 
     }

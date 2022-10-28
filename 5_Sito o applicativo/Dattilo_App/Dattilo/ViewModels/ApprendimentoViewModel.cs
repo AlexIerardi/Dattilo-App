@@ -29,7 +29,7 @@ namespace Dattilo.ViewModels
                     return;
                 model.NCaratteri = value;
                 OnPropertyChanged(nameof(NCaratteri));
-                model.cambiaLunghezzaCharLivello();
+                //model.cambiaLunghezzaCharLivello();
                 OnPropertyChanged(nameof(Stampa));
             }
         }        
@@ -47,17 +47,39 @@ namespace Dattilo.ViewModels
         {
             get 
             {
-                if (model.confrontaChar())
-                    return "diomaiale";
-                else
-                    return "";
+                return model.TestoUtente;
             }
             set 
             {
                 if (model.TestoUtente == value)
                     return;
                 model.TestoUtente = value;
+                model.confrontaChar();
                 OnPropertyChanged(nameof(TestoUtente));
+                OnPropertyChanged(nameof(CorrectChar));
+                OnPropertyChanged(nameof(WrongChar));
+            }
+        }
+        //numero di giusti sbagliati scritti dall'utente
+        public int CorrectChar
+        {
+            get { return model.CorrectChar; }
+            set
+            {
+                if (model.CorrectChar == value)
+                    return;
+                model.CorrectChar = value;
+            }
+        }
+        //numero di carattetri sbagliati scritti dall'utente
+        public int WrongChar
+        {
+            get { return model.WrongChar; }
+            set
+            {
+                if (model.WrongChar == value)
+                    return;
+                model.WrongChar = value;
             }
         }
 

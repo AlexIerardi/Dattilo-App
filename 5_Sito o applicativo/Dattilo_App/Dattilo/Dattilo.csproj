@@ -8,8 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Source\10 fingers keyboard.png" />
+    <None Remove="Source\clessidra.png" />
+    <None Remove="Source\fingers_keyboard.png" />
+    <None Remove="Source\percentuale.png" />
+    <None Remove="Source\sbaglaito.png" />
+    <None Remove="Source\sbagliato.png" />
+    <None Remove="Source\tachimetro.png" />
+    <None Remove="Source\visto.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Source\clessidra.png" />
+    <Resource Include="Source\fingers_keyboard.png" />
+    <Resource Include="Source\percentuale.png" />
+    <Resource Include="Source\sbagliato.png" />
+    <Resource Include="Source\tachimetro.png" />
+    <Resource Include="Source\visto.png" />
   </ItemGroup>
 
 </Project>
