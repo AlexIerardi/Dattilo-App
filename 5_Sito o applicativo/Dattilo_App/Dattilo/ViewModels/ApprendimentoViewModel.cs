@@ -31,6 +31,7 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(NCaratteri));
                 //model.cambiaLunghezzaCharLivello();
                 OnPropertyChanged(nameof(Stampa));
+                TestoUtente = "";
             }
         }        
         //stampa del array di caratteri
@@ -38,10 +39,10 @@ namespace Dattilo.ViewModels
         {
             get 
             {
-                model.generaLivello();
-                return model.stampaLivello(); 
+                model.generaLivello();         
+                return model.stampaLivello();
             }
-        }
+        }        
         //testo inserito dall'utente
         public string TestoUtente
         {
@@ -69,6 +70,7 @@ namespace Dattilo.ViewModels
                 if (model.CorrectChar == value)
                     return;
                 model.CorrectChar = value;
+                OnPropertyChanged(nameof(PercChar));
             }
         }
         //numero di carattetri sbagliati scritti dall'utente
@@ -80,9 +82,20 @@ namespace Dattilo.ViewModels
                 if (model.WrongChar == value)
                     return;
                 model.WrongChar = value;
+                OnPropertyChanged(nameof(PercChar));
+            }            
+        }
+        //percentuale di caratteri giusti
+        public int PercChar
+        {
+            get { return model.PercChar; }
+            set
+            {
+                if (model.PercChar == value)
+                    return;
+                model.PercChar = model.calcolaPercentuale();
             }
         }
-
         #endregion
 
         #region =================== costruttori ================

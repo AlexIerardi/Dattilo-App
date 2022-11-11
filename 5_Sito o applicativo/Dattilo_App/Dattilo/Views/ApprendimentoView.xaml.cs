@@ -15,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace Dattilo.Views
 {
     /// <summary>
@@ -28,5 +27,15 @@ namespace Dattilo.Views
             InitializeComponent();
         }
 
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Debug.WriteLine(e.Key);
+            //if (e.) 
+            //{
+                
+            //    e.Handled = true;
+
+            //}
+        }
     }
 }

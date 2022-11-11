@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VZ2PqHO7bjQqaYNQzYmFf9sRV1/NlCXqqJhinEQWz9wuXH7BSDYLL5FgvrYimRP1u75lsG7sGcxd7gu6PJ+tsg==",
+  "dgSpecHash": "5bRU7XzKnQoNcqoYk9LwSmWMk0bNjG8SEFXdBOAYv3AASEy7PLVZ5Yw3J5EYAnstpRM7yAiUS7YIYBZCT004DA==",
   "success": true,
-  "projectFilePath": "E:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\Dattilo.csproj",
+  "projectFilePath": "F:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\Dattilo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alex.ierardi\\.nuget\\packages\\communitytoolkit.mvvm\\8.0.0\\communitytoolkit.mvvm.8.0.0.nupkg.sha512",
     "C:\\Users\\alex.ierardi\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",

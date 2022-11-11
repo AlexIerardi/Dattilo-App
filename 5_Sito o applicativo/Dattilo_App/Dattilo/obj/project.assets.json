@@ -217,11 +217,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\Dattilo.csproj",
+      "projectUniqueName": "F:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\Dattilo.csproj",
       "projectName": "Dattilo",
-      "projectPath": "E:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\Dattilo.csproj",
+      "projectPath": "F:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\Dattilo.csproj",
       "packagesPath": "C:\\Users\\alex.ierardi\\.nuget\\packages\\",
-      "outputPath": "E:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\obj\\",
+      "outputPath": "F:\\scuola\\3° anno\\306\\Dattilo-App\\5_Sito o applicativo\\Dattilo_App\\Dattilo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

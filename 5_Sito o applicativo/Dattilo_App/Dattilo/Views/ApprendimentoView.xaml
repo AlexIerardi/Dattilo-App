@@ -74,7 +74,7 @@
                 TextAlignment="Left"
                 IsReadOnly="True"
                 HideUpDownButtons="True"
-                Value="0"/>
+                Value="{Binding Path=PercChar }"/>
         </StackPanel>
 
         <StackPanel
@@ -112,15 +112,15 @@
             Grid.Column="0"
             Grid.ColumnSpan="5"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Content="{Binding Path=Stampa}" />
-        
+            VerticalAlignment="Top"
+            Content="{Binding Path=Stampa}" Margin="0,14,0,0" Grid.RowSpan="2" Width="160" />
+
         <Image 
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="5"
             Source="../Source/fingers_keyboard.png"/>
-        
+
         <StackPanel 
             Grid.Row="3" 
             Grid.Column="0"
@@ -129,9 +129,10 @@
             <Label
                 Content="inserisci testo" />
             <TextBox 
-                Text="{Binding Path=TestoUtente, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding Path=TestoUtente, UpdateSourceTrigger=PropertyChanged}"
+                KeyDown="TextBox_KeyDown"/>
         </StackPanel>
-        
+
         <StackPanel 
             Grid.Row="4" 
             Grid.Column="0"
@@ -141,7 +142,7 @@
                 Content="Numero di caratteri"/>
             <controls:NumericUpDown
                 Value="{Binding Path=NCaratteri}"/>
-        </StackPanel>     
-        
+        </StackPanel>
+
     </Grid>
 </UserControl>

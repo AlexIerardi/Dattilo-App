@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Dattilo.Models
@@ -19,6 +20,7 @@ namespace Dattilo.Models
         //array di lettere per i levelli
         private string[][] livelli = new string[15][];
         int posChar = 0;
+        //private Thread thread;
         #endregion
 
         #region =================== membri & proprietà =========
@@ -45,7 +47,7 @@ namespace Dattilo.Models
         //numero di caratteri sbagliati
         public int WrongChar { get; set; }
         //percentuale di caratteri giusti
-        //da fare
+        public int PercChar { get; set; }
         #endregion
 
         #region =================== costruttori ================
@@ -58,6 +60,12 @@ namespace Dattilo.Models
             TestoUtente = "";
             CorrectChar = 0;
             WrongChar = 0;
+            PercChar = 0;
+            //ThreadStart ts = ThreadStart(aggiornaSecondi);
+            //thread = new Thread(ts);
+            //thread.IsBackground = true;
+            //thread.Priority = ThreadPriority.BelowNormal;
+            //thread.Start();
         }
 
         #endregion
@@ -67,28 +75,24 @@ namespace Dattilo.Models
         public void generaLivello()
         {
 
-            //for (int i = 0; i < NCaratteri; i++)
-            //{
-            //    CharLivello[i] = livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
-            //}
-
             for (int i = 0; i < NCaratteri; i++)
             {
-                if (i % 2 == 0)
-                {
-                    CharLivello += "f";
-
-                }
-                else
-                {
-                    CharLivello += "g";
-                }
+                CharLivello += livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
             }
-            //CharLivello[0] = "f";
-            //CharLivello[1] = "i";
-            //CharLivello[2] = "a";
-            //CharLivello[3] = "o";
+                Debug.WriteLine("|" + CharLivello + "|");
 
+            //for (int i = 0; i < NCaratteri; i++)
+            //{
+            //    if (i % 2 == 0)
+            //    {
+            //        CharLivello += "f";
+
+            //    }
+            //    else
+            //    {
+            //        CharLivello += "g";
+            //    }
+            //}
         }
         //incremento livello
         public void incrementaLivello()
@@ -118,17 +122,23 @@ namespace Dattilo.Models
             else
             {
                // quando ha finito di scrivere
+               incrementaLivello();
                posChar = 0;
             }
         }
         //metodo per riempire l'array di stringhe con 
         private void inizializzaLivelli()
         {
-            livelli[0] = new string[3] { "f", "j", " "  };
+            livelli[0] = new string[2] { "f", "j"};
             livelli[1] = new string[5] { "f", "j", "d", "k", " " };
             livelli[2] = new string[7] { "f", "j", "d", "k", "s", "l", " " };
             //altri livelli
         }
+        //
+        private void aggiornaSecondi()
+        {
+
+        }        
         #endregion
 
         #region =================== metodi generali ============
@@ -138,10 +148,32 @@ namespace Dattilo.Models
             string stampa = "";
             for(int i = 0; i < CharLivello.Length; i++)
             {
-                stampa += CharLivello[i];
+                if (CharLivello[i] == ' ')
+                {
+                    stampa += "_";
+                }
+                else
+                {
+                    stampa += CharLivello[i];
+                }
             }
+            Debug.WriteLine("|" + stampa + "|");
             return stampa;
-        }        
+        }
+        //metodo che calcola la percentuale di caratteri giusti
+        
+        public int calcolaPercentuale()
+            // non corretto
+        {
+            if (WrongChar == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return (int)(CorrectChar / TestoUtente.Length * 100);
+            }
+        }
         #endregion
 
 
