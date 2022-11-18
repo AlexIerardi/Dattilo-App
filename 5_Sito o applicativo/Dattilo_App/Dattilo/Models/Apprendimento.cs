@@ -16,11 +16,11 @@ namespace Dattilo.Models
         #endregion
 
         #region =================== membri statici =============
-        private Random rnd = new Random();
+        private Random rnd;
         //array di lettere per i levelli
         private string[][] livelli = new string[15][];
         int posChar = 0;
-        //private Thread thread;
+        private Thread thread;
         #endregion
 
         #region =================== membri & proprietà =========
@@ -31,13 +31,26 @@ namespace Dattilo.Models
             get { return nCaratteri; }
             set 
             {
-                if(value <= 30)
-                    value = 30; 
-                nCaratteri = value; 
+                if(value < 5)
+                    value = 5;
+                //else if(value > )
+                nCaratteri = value;
+                posChar = 0;
             }
         }
         //testo che inserisce l'utente
-        public string TestoUtente { get; set; }
+        private string _testoUtente;
+
+        public string TestoUtente
+        {
+            get { return _testoUtente; }
+            set 
+            {
+                _testoUtente = value;
+                ConfrontaChar();
+                CalcolaPercentuale();
+            }
+        }
         //array con i caratteri del livello
         public string CharLivello { get; set; }
         //numero che incrementa ad ogni livello superato
@@ -47,60 +60,53 @@ namespace Dattilo.Models
         //numero di caratteri sbagliati
         public int WrongChar { get; set; }
         //percentuale di caratteri giusti
-        public int PercChar { get; set; }
-        #endregion
+        public double PercChar { get; set; }
+        //
+        private int Cronometro { get; set; }
+
+        #endregion 
 
         #region =================== costruttori ================
         public Apprendimento()
         {
-            inizializzaLivelli();
-            NCaratteri = 30;
+            InizializzaLivelli();
+            NCaratteri = 5;
             Nlivello = 0;
             CharLivello = "";
             TestoUtente = "";
             CorrectChar = 0;
             WrongChar = 0;
             PercChar = 0;
-            //ThreadStart ts = ThreadStart(aggiornaSecondi);
-            //thread = new Thread(ts);
-            //thread.IsBackground = true;
-            //thread.Priority = ThreadPriority.BelowNormal;
-            //thread.Start();
+            Cronometro = 0;
+            rnd = new Random();
+            ThreadStart ts = new ThreadStart(AggiornaCronometro);
+
+            thread = new Thread(ts);
+            thread.IsBackground = true;
+            thread.Priority = ThreadPriority.BelowNormal;
+            thread.Start();
         }
 
         #endregion
 
         #region =================== metodi privati e aiuto =====
         //in base al livello riempe l'array con lettere differenti
-        public void generaLivello()
-        {
-
+        public void GeneraLivello()
+        {           
+            CharLivello = "";
             for (int i = 0; i < NCaratteri; i++)
             {
-                CharLivello += livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
+                if (livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)] == " " && i == 0 ) 
+                {
+                }
+                else
+                {
+                    CharLivello += livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
+                }
             }
-                Debug.WriteLine("|" + CharLivello + "|");
-
-            //for (int i = 0; i < NCaratteri; i++)
-            //{
-            //    if (i % 2 == 0)
-            //    {
-            //        CharLivello += "f";
-
-            //    }
-            //    else
-            //    {
-            //        CharLivello += "g";
-            //    }
-            //}
-        }
-        //incremento livello
-        public void incrementaLivello()
-        {
-            Nlivello++;
-        }
-        
-        public void confrontaChar()
+        }             
+        //confronta caratteri dell'utente con quelli generati
+        public void ConfrontaChar()
         {
             if (posChar < NCaratteri)
             {
@@ -116,67 +122,71 @@ namespace Dattilo.Models
                         TestoUtente = TestoUtente.Substring(0, posChar);
                         WrongChar++;
                     }
-
                 }
             }
             else
             {
                // quando ha finito di scrivere
-               incrementaLivello();
+               //incrementaLivello();
                posChar = 0;
             }
         }
         //metodo per riempire l'array di stringhe con 
-        private void inizializzaLivelli()
+        private void InizializzaLivelli()
         {
-            livelli[0] = new string[2] { "f", "j"};
+            livelli[0] = new string[3] { "f", "j", " "};
             livelli[1] = new string[5] { "f", "j", "d", "k", " " };
             livelli[2] = new string[7] { "f", "j", "d", "k", "s", "l", " " };
             //altri livelli
         }
-        //
-        private void aggiornaSecondi()
+        //metdo per calcolare la percentuale
+        public void CalcolaPercentuale()
         {
+            if ((CorrectChar + WrongChar) > 0)
+                PercChar = ((double)CorrectChar / (double)(CorrectChar + WrongChar))*100;
+            Debug.WriteLine(PercChar);
+        }
+        //metdo che aggiorno il cronometro
+        private void AggiornaCronometro()
+        {
+            while (true)
+            {
+                Cronometro++;
+                ConvertToSM();
+                Thread.Sleep(1000);
+            }
+        }
+        public string ConvertToSM()
+        {
+            int min = Cronometro / 60;
+            int sec = Cronometro - min * 60;
+            string secText = Convert.ToString(sec);
+            string minText = Convert.ToString(min);
 
-        }        
+            if (sec < 10)
+            {
+                secText = "0" + sec;
+            }
+            if (min < 10)
+            {
+                minText = "0" + min;
+            }
+            return minText + ":" + secText ;
+        }
         #endregion
 
         #region =================== metodi generali ============
         //metodo che stampa l'array dei caratteri
         public string stampaLivello()
         {
+            GeneraLivello();
             string stampa = "";
             for(int i = 0; i < CharLivello.Length; i++)
             {
-                if (CharLivello[i] == ' ')
-                {
-                    stampa += "_";
-                }
-                else
-                {
-                    stampa += CharLivello[i];
-                }
+                stampa += CharLivello[i];
             }
-            Debug.WriteLine("|" + stampa + "|");
             return stampa;
         }
-        //metodo che calcola la percentuale di caratteri giusti
-        
-        public int calcolaPercentuale()
-            // non corretto
-        {
-            if (WrongChar == 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return (int)(CorrectChar / TestoUtente.Length * 100);
-            }
-        }
         #endregion
-
-
-
     }
 }

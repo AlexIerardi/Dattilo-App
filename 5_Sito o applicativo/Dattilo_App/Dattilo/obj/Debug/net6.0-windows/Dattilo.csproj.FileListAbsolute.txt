@@ -100,3 +100,4 @@ F:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\
 F:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo.pdb
 F:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\Dattilo.genruntimeconfig.cache
 F:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\ref\Dattilo.dll
+E:\scuola\3° anno\306\Dattilo-App\5_Sito o applicativo\Dattilo_App\Dattilo\obj\Debug\net6.0-windows\App.baml

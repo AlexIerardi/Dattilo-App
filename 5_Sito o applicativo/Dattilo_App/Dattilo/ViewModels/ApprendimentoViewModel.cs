@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Dattilo.Models;
+using CommunityToolkit.Mvvm.Input;
+using System.Threading;
 
 namespace Dattilo.ViewModels
 {
@@ -15,6 +17,7 @@ namespace Dattilo.ViewModels
         #endregion
 
         #region =================== membri statici =============
+        private Thread thread;
         private Apprendimento model;
         #endregion
 
@@ -27,9 +30,8 @@ namespace Dattilo.ViewModels
             {
                 if (model.NCaratteri == value)
                     return;
-                model.NCaratteri = value;
+                model.NCaratteri = value;                
                 OnPropertyChanged(nameof(NCaratteri));
-                //model.cambiaLunghezzaCharLivello();
                 OnPropertyChanged(nameof(Stampa));
                 TestoUtente = "";
             }
@@ -37,11 +39,7 @@ namespace Dattilo.ViewModels
         //stampa del array di caratteri
         public String Stampa
         {
-            get 
-            {
-                model.generaLivello();         
-                return model.stampaLivello();
-            }
+            get { return model.stampaLivello(); }            
         }        
         //testo inserito dall'utente
         public string TestoUtente
@@ -55,57 +53,63 @@ namespace Dattilo.ViewModels
                 if (model.TestoUtente == value)
                     return;
                 model.TestoUtente = value;
-                model.confrontaChar();
                 OnPropertyChanged(nameof(TestoUtente));
                 OnPropertyChanged(nameof(CorrectChar));
                 OnPropertyChanged(nameof(WrongChar));
+                OnPropertyChanged(nameof(PercChar));
             }
         }
         //numero di giusti sbagliati scritti dall'utente
         public int CorrectChar
         {
             get { return model.CorrectChar; }
-            set
-            {
-                if (model.CorrectChar == value)
-                    return;
-                model.CorrectChar = value;
-                OnPropertyChanged(nameof(PercChar));
-            }
         }
         //numero di carattetri sbagliati scritti dall'utente
         public int WrongChar
         {
             get { return model.WrongChar; }
-            set
-            {
-                if (model.WrongChar == value)
-                    return;
-                model.WrongChar = value;
-                OnPropertyChanged(nameof(PercChar));
-            }            
         }
         //percentuale di caratteri giusti
-        public int PercChar
+        public double PercChar
         {
             get { return model.PercChar; }
-            set
-            {
-                if (model.PercChar == value)
-                    return;
-                model.PercChar = model.calcolaPercentuale();
-            }
         }
+        public string Cronometro
+        {
+            get { return model.ConvertToSM(); }
+        }
+        public RelayCommand NothingCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
         public ApprendimentoViewModel()
         {
             model = new Apprendimento();
+            NothingCommand = new RelayCommand(DoNothing);
+            ThreadStart ts = new ThreadStart(AggiornaCronometro);
+            thread = new Thread(ts);
+            thread.IsBackground = true;
+            thread.Priority = ThreadPriority.BelowNormal;
+            thread.Start();
         }
+
         #endregion
 
         #region =================== metodi privati e aiuto =====
+        // metodo che non fa nulla che viene richiamato quando viene premuto il tasto backsapce
+        private void DoNothing()
+        {
+            ;
+        }
+        private void AggiornaCronometro()
+        {
+            while (true)
+            {
+                OnPropertyChanged(nameof(Cronometro));
+                Thread.Sleep(200);
+            }
+        }
+        
         #endregion
 
         #region =================== metodi generali ============

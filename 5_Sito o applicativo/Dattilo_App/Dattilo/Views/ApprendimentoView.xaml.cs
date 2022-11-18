@@ -27,15 +27,5 @@ namespace Dattilo.Views
             InitializeComponent();
         }
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            //Debug.WriteLine(e.Key);
-            //if (e.) 
-            //{
-                
-            //    e.Handled = true;
-
-            //}
-        }
     }
 }
