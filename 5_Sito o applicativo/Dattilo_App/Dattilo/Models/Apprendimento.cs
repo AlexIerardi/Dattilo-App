@@ -21,6 +21,8 @@ namespace Dattilo.Models
         private string[][] livelli = new string[15][];
         int posChar = 0;
         private Thread thread;
+        //variabile che aumenta ogni secondo di 1
+        private int Cronometro { get; set; }
         #endregion
 
         #region =================== membri & proprietà =========
@@ -40,7 +42,6 @@ namespace Dattilo.Models
         }
         //testo che inserisce l'utente
         private string _testoUtente;
-
         public string TestoUtente
         {
             get { return _testoUtente; }
@@ -61,9 +62,11 @@ namespace Dattilo.Models
         public int WrongChar { get; set; }
         //percentuale di caratteri giusti
         public double PercChar { get; set; }
-        //
-        private int Cronometro { get; set; }
-
+        //variabile per abilitare il text Box per l'inserimento dell'utente
+        public bool TextBoxEnable { get; set; }
+        //variabile per impostare la visibiltà del bottono riprova
+        public String VisibilityButtonRiprova { get; set; }
+        public String VisibilityButtonAvanti { get; set; }
         #endregion 
 
         #region =================== costruttori ================
@@ -78,9 +81,12 @@ namespace Dattilo.Models
             WrongChar = 0;
             PercChar = 0;
             Cronometro = 0;
+            TextBoxEnable = true;
+            VisibilityButtonRiprova = "Collapsed";
+            VisibilityButtonAvanti = "Collapsed";
+
             rnd = new Random();
             ThreadStart ts = new ThreadStart(AggiornaCronometro);
-
             thread = new Thread(ts);
             thread.IsBackground = true;
             thread.Priority = ThreadPriority.BelowNormal;
@@ -92,16 +98,22 @@ namespace Dattilo.Models
         #region =================== metodi privati e aiuto =====
         //in base al livello riempe l'array con lettere differenti
         public void GeneraLivello()
-        {           
+        {
             CharLivello = "";
             for (int i = 0; i < NCaratteri; i++)
             {
-                if (livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)] == " " && i == 0 ) 
+                string charGenerato = livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
+                if (charGenerato.Equals(" ") && (i == 0 || i == nCaratteri - 1))
                 {
+                    i--;
+                }
+                else if (charGenerato.Equals(" ") && i > 1 && CharLivello[i - 1] == 32)
+                {
+                    i--;
                 }
                 else
                 {
-                    CharLivello += livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
+                    CharLivello += charGenerato;
                 }
             }
         }             
@@ -124,11 +136,15 @@ namespace Dattilo.Models
                     }
                 }
             }
-            else
+            if (posChar == NCaratteri)
             {
-               // quando ha finito di scrivere
-               //incrementaLivello();
-               posChar = 0;
+                VisibilityButtonRiprova = "Visible";
+                TextBoxEnable = false;
+                posChar = 0;
+                if(PercChar > 80)
+                {
+                    VisibilityButtonAvanti = "Visible";
+                }
             }
         }
         //metodo per riempire l'array di stringhe con 
@@ -144,7 +160,6 @@ namespace Dattilo.Models
         {
             if ((CorrectChar + WrongChar) > 0)
                 PercChar = ((double)CorrectChar / (double)(CorrectChar + WrongChar))*100;
-            Debug.WriteLine(PercChar);
         }
         //metdo che aggiorno il cronometro
         private void AggiornaCronometro()
@@ -156,6 +171,21 @@ namespace Dattilo.Models
                 Thread.Sleep(1000);
             }
         }
+        #endregion
+
+        #region =================== metodi generali ============
+        //metodo che stampa l'array dei caratteri
+        public string stampaLivello()
+        {
+            GeneraLivello();
+            string stampa = "";
+            for(int i = 0; i < CharLivello.Length; i++)
+            {
+                stampa += CharLivello[i];
+            }
+            return stampa;
+        }
+        //metodo che converte la variabile cronometro in minuti e secondi
         public string ConvertToSM()
         {
             int min = Cronometro / 60;
@@ -172,20 +202,6 @@ namespace Dattilo.Models
                 minText = "0" + min;
             }
             return minText + ":" + secText ;
-        }
-        #endregion
-
-        #region =================== metodi generali ============
-        //metodo che stampa l'array dei caratteri
-        public string stampaLivello()
-        {
-            GeneraLivello();
-            string stampa = "";
-            for(int i = 0; i < CharLivello.Length; i++)
-            {
-                stampa += CharLivello[i];
-            }
-            return stampa;
         }
         #endregion
     }

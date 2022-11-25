@@ -57,6 +57,9 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(CorrectChar));
                 OnPropertyChanged(nameof(WrongChar));
                 OnPropertyChanged(nameof(PercChar));
+                OnPropertyChanged(nameof(TextBoxEnable));
+                OnPropertyChanged(nameof(VisibilityButtonRiprova));
+                OnPropertyChanged(nameof(VisibilityButtonAvanti));
             }
         }
         //numero di giusti sbagliati scritti dall'utente
@@ -74,11 +77,29 @@ namespace Dattilo.ViewModels
         {
             get { return model.PercChar; }
         }
+        //stringa per stampare il cronometro che viene calcolato nel model
         public string Cronometro
         {
             get { return model.ConvertToSM(); }
         }
+        //variabile per abilitare il textbox
+        public bool TextBoxEnable
+        {
+            get { return model.TextBoxEnable; }
+        }
+        //stringa per la visibilità del bottone riprova
+        public string VisibilityButtonRiprova
+        {
+            get { return model.VisibilityButtonRiprova; }
+        }
+        //stringa per la visibilità del bottono avanti
+        public string VisibilityButtonAvanti
+        {
+            get { return model.VisibilityButtonAvanti; }
+        }
         public RelayCommand NothingCommand { get; protected set; }
+        public RelayCommand RiprovaCommand { get; protected set; }
+        public RelayCommand AvantiCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -86,12 +107,16 @@ namespace Dattilo.ViewModels
         {
             model = new Apprendimento();
             NothingCommand = new RelayCommand(DoNothing);
+            RiprovaCommand = new RelayCommand(Riprova);
+            AvantiCommand = new RelayCommand(Avanti);
             ThreadStart ts = new ThreadStart(AggiornaCronometro);
             thread = new Thread(ts);
             thread.IsBackground = true;
             thread.Priority = ThreadPriority.BelowNormal;
             thread.Start();
         }
+
+
 
         #endregion
 
@@ -101,6 +126,7 @@ namespace Dattilo.ViewModels
         {
             ;
         }
+        // metodo che aggiorna il cronometro ogni 200 ms
         private void AggiornaCronometro()
         {
             while (true)
@@ -109,7 +135,29 @@ namespace Dattilo.ViewModels
                 Thread.Sleep(200);
             }
         }
-        
+        // metdo che viene evocato quando si preme sul bottone riprova
+        private void Riprova()
+        {
+            TestoUtente = "";
+            OnPropertyChanged(nameof(Stampa));
+            model.TextBoxEnable = true;
+            OnPropertyChanged(nameof(TextBoxEnable));
+            model.VisibilityButtonRiprova = "Collapsed";
+            OnPropertyChanged(nameof(VisibilityButtonRiprova));
+            model.VisibilityButtonAvanti = "Collapsed";
+            OnPropertyChanged(nameof(VisibilityButtonAvanti));
+            model.CorrectChar = 0;
+            OnPropertyChanged(nameof(CorrectChar));
+            model.WrongChar = 0;
+            OnPropertyChanged(nameof(WrongChar));
+            model.PercChar = 0;
+            OnPropertyChanged(nameof(PercChar));
+        }
+        // metdo che viene evocato quando si preme sul bottone avanti
+        private void Avanti()
+        {
+            //da fare
+        }
         #endregion
 
         #region =================== metodi generali ============
