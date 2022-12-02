@@ -25,7 +25,6 @@ namespace Dattilo.ViewModels
 
         public MainViewModel()
         {
-            //_selectedViewModel = new MainViewModel();
             UpdateViewCommand = new RelayCommand<string>(OnUpdate);
         }
 

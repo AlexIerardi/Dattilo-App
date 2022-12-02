@@ -13,16 +13,19 @@ namespace Dattilo.Models
 
 
         #region =================== costanti ===================
+        //numero massimo di livelli
+        private const int LIVELLO_MASSIMO = 2;
         #endregion
 
         #region =================== membri statici =============
+        //random
         private Random rnd;
         //array di lettere per i levelli
         private string[][] livelli = new string[15][];
-        int posChar = 0;
+        //posizione del carattere che si sta controllando
+        int posCar = 0;
+        //thread per la realizzazione del cronometro
         private Thread thread;
-        //variabile che aumenta ogni secondo di 1
-        private int Cronometro { get; set; }
         #endregion
 
         #region =================== membri & proprietà =========
@@ -37,7 +40,7 @@ namespace Dattilo.Models
                     value = 5;
                 //else if(value > )
                 nCaratteri = value;
-                posChar = 0;
+                posCar = 0;
             }
         }
         //testo che inserisce l'utente
@@ -49,24 +52,26 @@ namespace Dattilo.Models
             {
                 _testoUtente = value;
                 ConfrontaChar();
-                CalcolaPercentuale();
             }
         }
         //array con i caratteri del livello
-        public string CharLivello { get; set; }
+        public string CarLivello { get; set; }
         //numero che incrementa ad ogni livello superato
-        public int Nlivello { get; set; }
+        public int NLivello { get; set; }
         //numero di caratteri giusti
-        public int CorrectChar { get; set; }
+        public int CorrectCar { get; set; }
         //numero di caratteri sbagliati
-        public int WrongChar { get; set; }
+        public int WrongCar { get; set; }
         //percentuale di caratteri giusti
-        public double PercChar { get; set; }
+        public double PercCar { get; set; }
+        //variabile che aumenta ogni secondo di 1
+        public int Cronometro { get; set; }
         //variabile per abilitare il text Box per l'inserimento dell'utente
-        public bool TextBoxEnable { get; set; }
+        public bool TextBoxAttivo { get; set; }
         //variabile per impostare la visibiltà del bottono riprova
-        public String VisibilityButtonRiprova { get; set; }
-        public String VisibilityButtonAvanti { get; set; }
+        public String VisibilitaPulsanteRiprova { get; set; }
+        public String VisibilitaPulsanteAvanti { get; set; }
+        public String VisibilitaPulsantePrecedente { get; set; }
         #endregion 
 
         #region =================== costruttori ================
@@ -74,16 +79,17 @@ namespace Dattilo.Models
         {
             InizializzaLivelli();
             NCaratteri = 5;
-            Nlivello = 0;
-            CharLivello = "";
+            NLivello = 0;
+            CarLivello = "";
             TestoUtente = "";
-            CorrectChar = 0;
-            WrongChar = 0;
-            PercChar = 0;
+            CorrectCar = 0;
+            WrongCar = 0;
+            PercCar = 0;
             Cronometro = 0;
-            TextBoxEnable = true;
-            VisibilityButtonRiprova = "Collapsed";
-            VisibilityButtonAvanti = "Collapsed";
+            TextBoxAttivo = true;
+            VisibilitaPulsanteRiprova = "Collapsed";
+            VisibilitaPulsanteAvanti = "Collapsed";
+            VisibilitaPulsantePrecedente = "Collapsed";
 
             rnd = new Random();
             ThreadStart ts = new ThreadStart(AggiornaCronometro);
@@ -99,55 +105,57 @@ namespace Dattilo.Models
         //in base al livello riempe l'array con lettere differenti
         public void GeneraLivello()
         {
-            CharLivello = "";
+            CarLivello = "";
             for (int i = 0; i < NCaratteri; i++)
             {
-                string charGenerato = livelli[Nlivello][rnd.Next(0, livelli[Nlivello].Length)];
+                string charGenerato = livelli[NLivello][rnd.Next(0, livelli[NLivello].Length)];
                 if (charGenerato.Equals(" ") && (i == 0 || i == nCaratteri - 1))
                 {
                     i--;
                 }
-                else if (charGenerato.Equals(" ") && i > 1 && CharLivello[i - 1] == 32)
+                else if (charGenerato.Equals(" ") && i > 1 && CarLivello[i - 1] == 32)
                 {
                     i--;
                 }
                 else
                 {
-                    CharLivello += charGenerato;
+                    CarLivello += charGenerato;
                 }
             }
         }             
         //confronta caratteri dell'utente con quelli generati
         public void ConfrontaChar()
         {
-            if (posChar < NCaratteri)
+            if (posCar < NCaratteri)
             {
-                if(TestoUtente.Length-1 == posChar)
+                if(TestoUtente.Length-1 == posCar)
                 {
-                    if (TestoUtente[posChar].Equals(CharLivello[posChar])) 
+                    if (TestoUtente[posCar].Equals(CarLivello[posCar])) 
                     {
-                        posChar++;
-                        CorrectChar++;
+                        posCar++;
+                        CorrectCar++;
                     }
                     else
                     {
-                        TestoUtente = TestoUtente.Substring(0, posChar);
-                        WrongChar++;
+                        TestoUtente = TestoUtente.Substring(0, posCar);
+                        WrongCar++;
                     }
                 }
-            }
-            if (posChar == NCaratteri)
+            }            
+            CalcolaPercentuale();
+            if (posCar == NCaratteri)
             {
-                VisibilityButtonRiprova = "Visible";
-                TextBoxEnable = false;
-                posChar = 0;
-                if(PercChar > 80)
-                {
-                    VisibilityButtonAvanti = "Visible";
-                }
+                posCar = 0;
+                TextBoxAttivo = false;
+                //posizione sbaglaita
+                if (NLivello != 0)
+                    VisibilitaPulsantePrecedente = "Visible";
+                VisibilitaPulsanteRiprova = "Visible";
+                if(PercCar > 80 && NLivello < LIVELLO_MASSIMO)
+                    VisibilitaPulsanteAvanti = "Visible";
             }
         }
-        //metodo per riempire l'array di stringhe con 
+        //metodo per riempe l'array dei livelli con i rispettivi caratteri
         private void InizializzaLivelli()
         {
             livelli[0] = new string[3] { "f", "j", " "};
@@ -158,8 +166,8 @@ namespace Dattilo.Models
         //metdo per calcolare la percentuale
         public void CalcolaPercentuale()
         {
-            if ((CorrectChar + WrongChar) > 0)
-                PercChar = ((double)CorrectChar / (double)(CorrectChar + WrongChar))*100;
+            if ((CorrectCar + WrongCar) > 0)
+                PercCar = ((double)CorrectCar / (double)(CorrectCar + WrongCar))*100;
         }
         //metdo che aggiorno il cronometro
         private void AggiornaCronometro()
@@ -175,13 +183,13 @@ namespace Dattilo.Models
 
         #region =================== metodi generali ============
         //metodo che stampa l'array dei caratteri
-        public string stampaLivello()
+        public string StampaLivello()
         {
             GeneraLivello();
             string stampa = "";
-            for(int i = 0; i < CharLivello.Length; i++)
+            for(int i = 0; i < CarLivello.Length; i++)
             {
-                stampa += CharLivello[i];
+                stampa += CarLivello[i];
             }
             return stampa;
         }
@@ -202,6 +210,11 @@ namespace Dattilo.Models
                 minText = "0" + min;
             }
             return minText + ":" + secText ;
+        }
+        //metdo che ritorna la stampa con il numero del livello
+        public string StringaLivello()
+        {
+            return "LIVELLO: " + NLivello;
         }
         #endregion
     }

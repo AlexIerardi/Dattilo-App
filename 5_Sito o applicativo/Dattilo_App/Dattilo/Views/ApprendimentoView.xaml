@@ -43,7 +43,7 @@
                 HideUpDownButtons="True"
                 IsReadOnly="True"
                 TextAlignment="Left"
-                Value="{Binding Path=CorrectChar, Mode=OneWay}" />
+                Value="{Binding Path=CorrectCar, Mode=OneWay}" />
         </StackPanel>
 
         <StackPanel
@@ -57,7 +57,7 @@
                 HideUpDownButtons="True"
                 IsReadOnly="True"
                 TextAlignment="Left"
-                Value="{Binding Path=WrongChar, Mode=OneWay}" />
+                Value="{Binding Path=WrongCar, Mode=OneWay}" />
         </StackPanel>
 
         <StackPanel
@@ -72,7 +72,7 @@
                 IsReadOnly="True"
                 StringFormat="n0"
                 TextAlignment="Left"
-                Value="{Binding Path=PercChar, Mode=OneWay}" />
+                Value="{Binding Path=PercCar, Mode=OneWay}" />
         </StackPanel>
 
         <StackPanel
@@ -122,7 +122,7 @@
             Grid.ColumnSpan="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
-            <TextBox IsEnabled="{Binding Path=TextBoxEnable}" Text="{Binding Path=TestoUtente, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox IsEnabled="{Binding Path=TextBoxAttivo}" Text="{Binding Path=TestoUtente, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.InputBindings>
                     <KeyBinding Key="Backspace" Command="{Binding Path=NothingCommand}" />
                 </TextBox.InputBindings>
@@ -134,7 +134,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Command="{Binding Path=RiprovaCommand}"
-            Visibility="{Binding Path=VisibilityButtonRiprova}"
+            Visibility="{Binding Path=VisibilitaPulsanteRiprova}"
             Content="RIPROVA" />
         <Button
             Grid.Row="3"
@@ -142,8 +142,16 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Command="{Binding Path=AvantiCommand}"
-            Visibility="{Binding Path=VisibilityButtonAvanti}"
+            Visibility="{Binding Path=VisibilitaPulsanteAvanti}"
             Content="AVANTI" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding Path=PrecedenteCommand}"
+            Visibility="{Binding Path=VisibilitaPulsantePrecedente}"
+            Content="PRECEDENTE" />
         <StackPanel
             Grid.Row="4"
             Grid.Column="0"
@@ -152,6 +160,11 @@
             <Label Content="Caratteri" />
             <controls:NumericUpDown Value="{Binding Path=NCaratteri}" />
         </StackPanel>
-
+        <!--<ListBox Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" >
+            <Label Content="LIVELLI" HorizontalAlignment="Center"/>
+            <Button HorizontalAlignment="Center" Content="livello 1"/>
+            <Button HorizontalAlignment="Center" Content="livello 2"/>
+            <Button HorizontalAlignment="Center" Content="livello 3"/>
+        </ListBox>-->
     </Grid>
 </UserControl>
