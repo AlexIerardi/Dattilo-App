@@ -18,7 +18,7 @@ namespace Dattilo.ViewModels
         #endregion
 
         #region =================== membri statici =============
-        private Thread thread;
+        public Thread thread;
         private Apprendimento model;
         #endregion
 
@@ -47,6 +47,7 @@ namespace Dattilo.ViewModels
                     return;
                 model.NLivello = value;
                 OnPropertyChanged(nameof(NLivello));
+
             }
         }
         //stampa del array di caratteri
@@ -129,7 +130,7 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(TextBoxAttivo));
             }
         }
-        //stringa per la visibilità del bottone riprova
+        //stringa per la visibilità del pulsante riprova
         public string VisibilitaPulsanteRiprova
         {
             get { return model.VisibilitaPulsanteRiprova; }
@@ -137,14 +138,11 @@ namespace Dattilo.ViewModels
             {
                 if (model.VisibilitaPulsanteRiprova == value)
                     return;
-                else if (value == "Collapsed" || value == "Visible")
-                    model.VisibilitaPulsanteRiprova = value;
-                else
-                    model.VisibilitaPulsanteRiprova = "Collapsed";
+                model.VisibilitaPulsanteRiprova = value;
                 OnPropertyChanged(nameof(VisibilitaPulsanteRiprova));
             }
         }
-        //stringa per la visibilità del bottono avanti
+        //stringa per la visibilità del pulsante avanti
         public string VisibilitaPulsanteAvanti
         {
             get { return model.VisibilitaPulsanteAvanti; }
@@ -152,19 +150,11 @@ namespace Dattilo.ViewModels
             {
                 if (model.VisibilitaPulsanteAvanti == value)
                     return;
-                else if (value == "Collapsed" || value == "Visible")
-                    model.VisibilitaPulsanteAvanti = value;
-                else
-                    model.VisibilitaPulsanteAvanti = "Collapsed";
+                model.VisibilitaPulsanteAvanti = value;
                 OnPropertyChanged(nameof(VisibilitaPulsanteAvanti));
             }
         }
-        //stringa con il numero del livello
-        public string StringaLivello
-        {
-            get { return model.StringaLivello(); }
-        }
-        //stringa per la visibilità del bottono precedente
+        //stringa per la visibilità del pulsante precedente
         public string VisibilitaPulsantePrecedente
         {
             get { return model.VisibilitaPulsantePrecedente; }
@@ -172,26 +162,85 @@ namespace Dattilo.ViewModels
             {
                 if (model.VisibilitaPulsantePrecedente == value)
                     return;
-                else if (value == "Collapsed" || value == "Visible")
-                    model.VisibilitaPulsantePrecedente = value;
-                else
-                    model.VisibilitaPulsantePrecedente = "Collapsed";
+                model.VisibilitaPulsantePrecedente = value;
                 OnPropertyChanged(nameof(VisibilitaPulsantePrecedente));
             }
+        }
+        public string VisibilitaCaratteriGenerati
+        {
+            get { return model.VisibilitaCaratteriGenerati; }
+            set
+            {
+                if (model.VisibilitaCaratteriGenerati == value)
+                    return;
+                model.VisibilitaCaratteriGenerati = value;
+                OnPropertyChanged(nameof(VisibilitaCaratteriGenerati));
+            }
+        }
+        public string VisibilitaStringaLivello
+        {
+            get { return model.VisibilitaStringaLivello; }
+            set
+            {
+                if (model.VisibilitaStringaLivello == value)
+                    return;
+                model.VisibilitaStringaLivello = value;
+                OnPropertyChanged(nameof(VisibilitaStringaLivello));
+            }
+        }
+        public string VisibilitaTextBox
+        {
+            get { return model.VisibilitaTextBox; }
+            set
+            {
+                if (model.VisibilitaTextBox == value)
+                    return;
+                model.VisibilitaTextBox = value;
+                OnPropertyChanged(nameof(VisibilitaTextBox));
+            }
+        }
+        public string VisibilitaPulsanteInizia
+        {
+            get { return model.VisibilitaPulsanteInizia; }
+            set
+            {
+                if (model.VisibilitaPulsanteInizia == value)
+                    return;
+                model.VisibilitaPulsanteInizia = value;
+                OnPropertyChanged(nameof(VisibilitaPulsanteInizia));
+            }
+        }
+        public string VisibilitaCaratteri
+        {
+            get { return model.VisibilitaCaratteri; }
+            set
+            {
+                if (model.VisibilitaCaratteri == value)
+                    return;
+                model.VisibilitaCaratteri = value;
+                OnPropertyChanged(nameof(VisibilitaCaratteri));
+            }
+        }
+        //stringa con il numero del livello
+        public string StringaLivello
+        {
+            get { return model.StringaLivello(); }
         }
         public RelayCommand NothingCommand { get; set; }
         public RelayCommand RiprovaCommand { get; set; }
         public RelayCommand AvantiCommand { get; set; }
         public RelayCommand PrecedenteCommand { get; set; }
+        public RelayCommand IniziaCommand { get; set; }
         #endregion
 
         #region =================== costruttori ================
         public ApprendimentoViewModel()
         {
             model = new Apprendimento();
-            NothingCommand = new RelayCommand(DoNothing);
+            NothingCommand = new RelayCommand(BloccaTasto);
             RiprovaCommand = new RelayCommand(Riprova);
             AvantiCommand = new RelayCommand(Avanti);
+            IniziaCommand = new RelayCommand(Inizia);
             PrecedenteCommand = new RelayCommand(Precedente);
             ThreadStart ts = new ThreadStart(AggiornaCronometro);
             thread = new Thread(ts);
@@ -199,11 +248,12 @@ namespace Dattilo.ViewModels
             thread.Priority = ThreadPriority.BelowNormal;
             thread.Start();
         }
+
         #endregion
 
         #region =================== metodi privati e aiuto =====
         // metodo che non fa nulla che viene richiamato quando viene premuto il tasto backsapce
-        private void DoNothing()
+        private void BloccaTasto()
         {
             ;
         }
@@ -216,32 +266,45 @@ namespace Dattilo.ViewModels
                 Thread.Sleep(200);
             }
         }
-        // metodo che viene evocato quando si preme sul bottone riprova
+        // metodo che viene invocato quando si preme sul pulsante riprova
         private void Riprova()
         {
             TestoUtente = "";
             TextBoxAttivo = true;
             VisibilitaPulsanteRiprova = "Collapsed";
-            VisibilitaPulsanteAvanti = "Collapsed";            
+            VisibilitaPulsanteAvanti = "Collapsed";
             CorrectCar = 0;
             WrongCar = 0;
             PercCar = 0;
             model.Cronometro = 0;
             OnPropertyChanged(nameof(NLivello));
             OnPropertyChanged(nameof(Stampa));
+            OnPropertyChanged(nameof(VisibilitaPulsantePrecedente));
+            OnPropertyChanged(nameof(StringaLivello));
         }
-        // metodo che viene evocato quando si preme sul bottone avanti
+        // metodo che viene invocato quando si preme sul pulsante avanti
         private void Avanti()
         {
             NLivello++;
             Riprova();
         }
-        // metodo che viene evocato quando si preme sul bottone precedente
+        // metodo che viene invocato quando si preme sul pulsante precedente
         private void Precedente()
         {
             NLivello--;
-            Riprova();
+            Riprova();       
         }
+        // metodo che viene invocato quando si preme sul pulsante inizia
+        private void Inizia()
+        {
+            model.Cronometro = 0;
+            VisibilitaPulsanteInizia = "Collapsed";
+            VisibilitaCaratteri = "Collapsed";
+            VisibilitaCaratteriGenerati = "Visible";
+            VisibilitaStringaLivello = "Visible";
+            VisibilitaTextBox = "Visible";
+        }
+
         #endregion
 
         #region =================== metodi generali ============

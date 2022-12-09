@@ -14,7 +14,7 @@ namespace Dattilo.Models
 
         #region =================== costanti ===================
         //numero massimo di livelli
-        private const int LIVELLO_MASSIMO = 2;
+        private const int LIVELLO_MASSIMO = 12;
         #endregion
 
         #region =================== membri statici =============
@@ -70,8 +70,15 @@ namespace Dattilo.Models
         public bool TextBoxAttivo { get; set; }
         //variabile per impostare la visibiltà del bottono riprova
         public String VisibilitaPulsanteRiprova { get; set; }
+        //variabile per impostare la visibiltà del bottono avanti
         public String VisibilitaPulsanteAvanti { get; set; }
+        //variabile per impostare la visibiltà del bottono precedente
         public String VisibilitaPulsantePrecedente { get; set; }
+        public String VisibilitaCaratteriGenerati { get; set; }
+        public String VisibilitaStringaLivello { get; set; }
+        public String VisibilitaTextBox { get; set; }
+        public String VisibilitaPulsanteInizia { get; set; }
+        public String VisibilitaCaratteri { get; set; }
         #endregion 
 
         #region =================== costruttori ================
@@ -90,6 +97,11 @@ namespace Dattilo.Models
             VisibilitaPulsanteRiprova = "Collapsed";
             VisibilitaPulsanteAvanti = "Collapsed";
             VisibilitaPulsantePrecedente = "Collapsed";
+            VisibilitaCaratteriGenerati = "Collapsed";
+            VisibilitaStringaLivello = "Collapsed";
+            VisibilitaTextBox = "Collapsed";
+            VisibilitaPulsanteInizia = "Visible";
+            VisibilitaCaratteri = "Visible";
 
             rnd = new Random();
             ThreadStart ts = new ThreadStart(AggiornaCronometro);
@@ -103,8 +115,9 @@ namespace Dattilo.Models
 
         #region =================== metodi privati e aiuto =====
         //in base al livello riempe l'array con lettere differenti
-        public void GeneraLivello()
+        private void GeneraLivello()
         {
+            cambiaStatoPulsantePrecedente();
             CarLivello = "";
             for (int i = 0; i < NCaratteri; i++)
             {
@@ -124,7 +137,7 @@ namespace Dattilo.Models
             }
         }             
         //confronta caratteri dell'utente con quelli generati
-        public void ConfrontaChar()
+        private void ConfrontaChar()
         {
             if (posCar < NCaratteri)
             {
@@ -143,17 +156,30 @@ namespace Dattilo.Models
                 }
             }            
             CalcolaPercentuale();
-            if (posCar == NCaratteri)
+
+            cambiaStatoPulsantePrecedente();
+
+            if (livelloFinito())
             {
                 posCar = 0;
                 TextBoxAttivo = false;
-                //posizione sbaglaita
-                if (NLivello != 0)
-                    VisibilitaPulsantePrecedente = "Visible";
                 VisibilitaPulsanteRiprova = "Visible";
                 if(PercCar > 80 && NLivello < LIVELLO_MASSIMO)
                     VisibilitaPulsanteAvanti = "Visible";
             }
+        }
+        //metodo che ritorna true quando il livello è finito
+        private bool livelloFinito()
+        {
+            return posCar == NCaratteri;
+        }
+        //metodo che cambia lo stato del pulsante precedente se il livello è maggiore di 0
+        private void cambiaStatoPulsantePrecedente()
+        {
+            if (NLivello > 0)
+                VisibilitaPulsantePrecedente = "Visible";
+            else
+                VisibilitaPulsantePrecedente = "Collapsed";
         }
         //metodo per riempe l'array dei livelli con i rispettivi caratteri
         private void InizializzaLivelli()
@@ -161,10 +187,19 @@ namespace Dattilo.Models
             livelli[0] = new string[3] { "f", "j", " "};
             livelli[1] = new string[5] { "f", "j", "d", "k", " " };
             livelli[2] = new string[7] { "f", "j", "d", "k", "s", "l", " " };
-            //altri livelli
+            livelli[3] = new string[9] { "f", "j", "d", "k", "s", "l", "a", "é", " " };
+            livelli[4] = new string[11] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", " " };
+            livelli[5] = new string[13] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", " " };
+            livelli[6] = new string[15] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", "e", "i", " " };
+            livelli[7] = new string[17] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", "e", "i", "w", "o", " " };
+            livelli[8] = new string[19] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", "e", "i", "w", "o", "q", "p", " " };
+            livelli[9] = new string[21] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", "e", "i", "w", "o", "q", "p", "t", "z", " " };
+            livelli[10] = new string[23] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", "e", "i", "w", "o", "q", "p", "t", "z", "c", "m", " " };
+            livelli[11] = new string[25] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", "e", "i", "w", "o", "q", "p", "t", "z", "c", "m", "x", ",", " " };
+            livelli[12] = new string[27] { "f", "j", "d", "k", "s", "l", "a", "é", "g", "h", "u", "r", "e", "i", "w", "o", "q", "p", "t", "z", "c", "m", "x", ",", "y", ".", " " };
         }
         //metdo per calcolare la percentuale
-        public void CalcolaPercentuale()
+        private void CalcolaPercentuale()
         {
             if ((CorrectCar + WrongCar) > 0)
                 PercCar = ((double)CorrectCar / (double)(CorrectCar + WrongCar))*100;
@@ -214,7 +249,7 @@ namespace Dattilo.Models
         //metdo che ritorna la stampa con il numero del livello
         public string StringaLivello()
         {
-            return "LIVELLO: " + NLivello;
+            return "LIVELLO: " + (NLivello+1);
         }
         #endregion
     }
