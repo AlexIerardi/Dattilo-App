@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dattilo.ViewModels
 {
-    ublic class MenuViewModel : ObservableObject
+    public class MenuViewModel : ObservableObject
     {
     }
 }
