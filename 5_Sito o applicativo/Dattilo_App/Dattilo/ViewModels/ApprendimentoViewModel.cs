@@ -75,6 +75,7 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(VisibilitaPulsanteRiprova));
                 OnPropertyChanged(nameof(VisibilitaPulsanteAvanti));
                 OnPropertyChanged(nameof(VisibilitaPulsantePrecedente));
+                OnPropertyChanged(nameof(Velocita));
             }
         }
         //numero di giusti sbagliati scritti dall'utente
@@ -113,6 +114,18 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(PercCar));
             }
         }
+        //
+        public double Velocita
+        {
+            get { return model.Velocita; }
+            set
+            {
+                if (model.Velocita == value)
+                    return;
+                model.Velocita = value;
+                OnPropertyChanged(nameof(Velocita));
+            }
+        }
         //stringa per stampare il cronometro che viene calcolato nel model
         public string Cronometro
         {
@@ -130,7 +143,7 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(TextBoxAttivo));
             }
         }
-        //stringa per la visibilità del pulsante riprova
+        //stringa per le visibilità dei pulsanti
         public string VisibilitaPulsanteRiprova
         {
             get { return model.VisibilitaPulsanteRiprova; }
@@ -142,7 +155,6 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(VisibilitaPulsanteRiprova));
             }
         }
-        //stringa per la visibilità del pulsante avanti
         public string VisibilitaPulsanteAvanti
         {
             get { return model.VisibilitaPulsanteAvanti; }
@@ -154,7 +166,6 @@ namespace Dattilo.ViewModels
                 OnPropertyChanged(nameof(VisibilitaPulsanteAvanti));
             }
         }
-        //stringa per la visibilità del pulsante precedente
         public string VisibilitaPulsantePrecedente
         {
             get { return model.VisibilitaPulsantePrecedente; }

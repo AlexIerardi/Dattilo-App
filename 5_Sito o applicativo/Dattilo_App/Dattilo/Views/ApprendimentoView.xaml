@@ -11,9 +11,26 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Orientation" Value= "Horizontal"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>            
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+    
     <UserControl.DataContext>
         <viewmodels:ApprendimentoViewModel />
     </UserControl.DataContext>
+    
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -33,68 +50,48 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel
-            Grid.Column="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <Image Source="../Source/visto.png" />
-            <controls:NumericUpDown
+            Grid.Column="0">
+            <Image Source="../Source/visto.png" Margin="20,20,0,20"/>
+            <TextBox
                 VerticalAlignment="Center"
-                HideUpDownButtons="True"
                 IsReadOnly="True"
                 TextAlignment="Left"
-                Value="{Binding Path=CorrectCar, Mode=OneWay}" />
+                Text="{Binding Path=CorrectCar, Mode=OneWay}" />
+        </StackPanel>
+        
+        <StackPanel
+            Grid.Column="1">
+            <Image Source="../Source/sbagliato.png" Margin="20,20,0,20"/>
+            <TextBox
+                VerticalAlignment="Center"
+                IsReadOnly="True"
+                TextAlignment="Left"
+                Text="{Binding Path=WrongCar, Mode=OneWay}" />
         </StackPanel>
 
         <StackPanel
-            Grid.Column="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <Image Source="../Source/sbagliato.png" />
-            <controls:NumericUpDown
+            Grid.Column="2">
+            <Image Source="../Source/percentuale.png" Margin="20,20,0,20"/>
+            <TextBox
                 VerticalAlignment="Center"
-                HideUpDownButtons="True"
                 IsReadOnly="True"
                 TextAlignment="Left"
-                Value="{Binding Path=WrongCar, Mode=OneWay}" />
+                Text="{Binding Path=PercCar, Mode=OneWay}" />
         </StackPanel>
 
         <StackPanel
-            Grid.Column="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <Image Source="../Source/percentuale.png" />
-            <controls:NumericUpDown
+            Grid.Column="3">
+            <Image Source="../Source/tachimetro.png" Margin="20,20,0,20"/>
+            <TextBox
                 VerticalAlignment="Center"
-                HideUpDownButtons="True"
                 IsReadOnly="True"
-                StringFormat="n0"
                 TextAlignment="Left"
-                Value="{Binding Path=PercCar, Mode=OneWay}" />
+                Text="{Binding Path=Velocita}" />
         </StackPanel>
 
         <StackPanel
-            Grid.Column="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <Image Source="../Source/tachimetro.png" />
-            <controls:NumericUpDown
-                VerticalAlignment="Center"
-                HideUpDownButtons="True"
-                IsReadOnly="True"
-                TextAlignment="Left"
-                Value="{Binding Path=Velocita}" />
-        </StackPanel>
-
-        <StackPanel
-            Grid.Column="4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <Image Source="../Source/clessidra.png" />
+            Grid.Column="4">
+            <Image Source="../Source/clessidra.png" Margin="20,20,0,20"/>
             <TextBox
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -104,8 +101,6 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             Content="{Binding Path=StringaLivello}"
             FontSize="15"
             Visibility="{Binding Path=VisibilitaStringaLivello}"/>
@@ -114,24 +109,20 @@
             Grid.Row="1"
             Grid.Column="1"
             Grid.ColumnSpan="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             Content="{Binding Path=Stampa}"
-            FontSize="15"
+            FontSize="20"
             Visibility="{Binding Path=VisibilitaCaratteriGenerati}"/>
 
         <Image
             Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
             Source="../Source/fingers_keyboard.png" />
 
         <StackPanel
             Grid.Row="3"
             Grid.Column="0"
-            Grid.ColumnSpan="5"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+            Grid.ColumnSpan="5">
             <TextBox
                 IsEnabled="{Binding Path=TextBoxAttivo}"
                 Text="{Binding Path=TestoUtente, UpdateSourceTrigger=PropertyChanged}"
@@ -141,45 +132,35 @@
                 </TextBox.InputBindings>
             </TextBox>
         </StackPanel>
+        
         <Button
             Grid.Row="3"
             Grid.Column="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             Command="{Binding Path=RiprovaCommand}"
             Content="RIPROVA"
             Visibility="{Binding Path=VisibilitaPulsanteRiprova}" />
         <Button
             Grid.Row="3"
             Grid.Column="4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             Command="{Binding Path=AvantiCommand}"
             Content="AVANTI"
             Visibility="{Binding Path=VisibilitaPulsanteAvanti}" />
         <Button
             Grid.Row="3"
             Grid.Column="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             Command="{Binding Path=PrecedenteCommand}"
             Content="PRECEDENTE"
             Visibility="{Binding Path=VisibilitaPulsantePrecedente}" />
         <StackPanel
             Grid.Row="4"
             Grid.Column="0"
-            VerticalAlignment="Center"
-            Orientation="Horizontal"
             Visibility="{Binding Path=VisibilitaCaratteri}">
             <Label Content="Caratteri" />
             <controls:NumericUpDown Value="{Binding Path=NCaratteri}" />
         </StackPanel>
-
         <Button
             Grid.Row="3"
             Grid.Column="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             Command="{Binding Path=IniziaCommand}"
             Content="INIZIA"
             Visibility="{Binding Path=VisibilitaPulsanteInizia}" />

@@ -36,9 +36,8 @@ namespace Dattilo.Models
             get { return nCaratteri; }
             set 
             {
-                if(value < 5)
-                    value = 5;
-                //else if(value > )
+                if(value < 50)
+                    value = 50;
                 nCaratteri = value;
                 posCar = 0;
             }
@@ -64,6 +63,7 @@ namespace Dattilo.Models
         public int WrongCar { get; set; }
         //percentuale di caratteri giusti
         public double PercCar { get; set; }
+        public double Velocita { get; set; }
         //variabile che aumenta ogni secondo di 1
         public int Cronometro { get; set; }
         //variabile per abilitare il text Box per l'inserimento dell'utente
@@ -85,13 +85,14 @@ namespace Dattilo.Models
         public Apprendimento()
         {
             InizializzaLivelli();
-            NCaratteri = 5;
+            NCaratteri = 50;
             NLivello = 0;
             CarLivello = "";
             TestoUtente = "";
             CorrectCar = 0;
             WrongCar = 0;
             PercCar = 0;
+            Velocita = 0;
             Cronometro = 0;
             TextBoxAttivo = true;
             VisibilitaPulsanteRiprova = "Collapsed";
@@ -156,6 +157,7 @@ namespace Dattilo.Models
                 }
             }            
             CalcolaPercentuale();
+            CalcolaVelocita();
 
             cambiaStatoPulsantePrecedente();
 
@@ -202,7 +204,19 @@ namespace Dattilo.Models
         private void CalcolaPercentuale()
         {
             if ((CorrectCar + WrongCar) > 0)
-                PercCar = ((double)CorrectCar / (double)(CorrectCar + WrongCar))*100;
+                PercCar = Math.Round(((double)CorrectCar / (double)(CorrectCar + WrongCar)) * 100);
+            
+        }
+        //
+        private void CalcolaVelocita()
+        {
+            int min = Cronometro / 60;
+            if (min > 0)
+            {
+                Velocita = ((CorrectCar+WrongCar) /5) / min;
+
+                Debug.WriteLine("**" + ((CorrectCar + WrongCar) / 5) / min + "**");
+            }
         }
         //metdo che aggiorno il cronometro
         private void AggiornaCronometro()
